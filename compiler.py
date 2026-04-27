@@ -4,8 +4,8 @@ import xml.etree.ElementTree as ET
 import struct
 
 # CONFIG
-XML_FILE = "./data/fra-eng/fra-eng.tei"
-OUTPUT_BIN = "wardwordward.db"
+XML_FILE = "./data/raw/fra-eng.tei"
+OUTPUT_BIN = "./data/compiled/fra-eng.db"
 ENTRY_FORMAT = "32s96s" # 32 bytes French, 96 bytes English
 
 print("Parsing XML... this might take a few seconds.")
