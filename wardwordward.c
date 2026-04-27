@@ -66,13 +66,29 @@ int main(int argc, char** argv)
     if ( result == NULL )
     {
         printf("no results\n");
+        exit(EXIT_SUCCESS);
     }
 
-    else
+
+    dict_entry_t* first_matching_element = result;
+    for ( ; strncmp(word_prefix, first_matching_element->original, strlen(word_prefix)) == 0; --first_matching_element )
     {
-        printf("%s: %s\n", result->original, result->translated);
+        if ( first_matching_element == data )
+        {
+            break;
+        }
+    }
+    ++first_matching_element;
+
+    for ( ; (char*)first_matching_element <= (char*) result; ++first_matching_element)
+    {
+        printf("%s: %s\n", first_matching_element->original, first_matching_element->translated);
     }
 
+    for ( ; strncmp(word_prefix, first_matching_element->original, strlen(word_prefix)) == 0; ++first_matching_element )
+    {
+        printf("%s: %s\n", first_matching_element->original, first_matching_element->translated);
+    }
 
     return 0;
 }
