@@ -18,6 +18,7 @@ typedef struct
 
 static inline char* get_next_arg(int* argc, char*** argv);
 static inline int prefix_compare(const void* _keyword, const void* _dict_entry);
+static inline void capitalise_string(char* str);
 
 static inline char* get_next_arg(int* argc, char*** argv)
 {
@@ -42,10 +43,22 @@ static inline int prefix_compare(const void* _keyword, const void* _dict_entry)
     return strncmp(keyword, dict_entry, strlen(keyword));
 }
 
+static inline void capitalise_string(char* str)
+{
+    for ( ; *str != '\0'; ++str )
+    {
+        if ( *str >= 'a' && *str <= 'z' )
+        {
+            *str -= 32;
+        }
+    }
+}
+
 int main(int argc, char** argv)
 {
     get_next_arg(&argc, &argv);
-    const char* word_prefix = get_next_arg(&argc, &argv);
+    char* word_prefix = get_next_arg(&argc, &argv);
+    capitalise_string(word_prefix);
 
     int dict_fd = open(DICT_DB_PATH, O_RDONLY);
 
