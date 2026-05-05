@@ -5,8 +5,6 @@
 #include <sys/stat.h>
 #include <string.h>
 
-#define DICT_DB_PATH "./data/compiled/fra-eng.db"
-
 #define ORIGINAL_LEN 32
 #define TRANSLATED_LEN 96
 
@@ -57,10 +55,11 @@ static inline void capitalise_string(char* str)
 int main(int argc, char** argv)
 {
     get_next_arg(&argc, &argv);
+    char* dict_db_path = get_next_arg(&argc, &argv);
     char* word_prefix = get_next_arg(&argc, &argv);
     capitalise_string(word_prefix);
 
-    int dict_fd = open(DICT_DB_PATH, O_RDONLY);
+    int dict_fd = open(dict_db_path, O_RDONLY);
 
     if ( dict_fd == -1 )
     {
